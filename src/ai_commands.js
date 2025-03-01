@@ -593,7 +593,9 @@ function procRunner(cmdPath, args = [], bAiOutReuse = true) {
     processCommand,
     status: true,
   };
-  const exit = (code, text) => {
+  const exit = (ucode, text) => {
+    // Convert unsigned to signed to be able to detect -1 from Tidy
+    let code = (ucode << 0) >> 0;
     aWrapperHotkey.reset(id);
     code = Number(code); // convert possible null into 0
     info.endTime = new Date().getTime();
@@ -920,7 +922,7 @@ const compileScript = () => {
   });
 };
 
-const tidyScript = () => {
+const tidy = () => {
   const thisDoc = window.activeTextEditor.document;
   const thisFile = getActiveDocumentFileName();
 
@@ -934,7 +936,43 @@ const tidyScript = () => {
     window.setStatusBarMessage(`Tidying script...${thisFile}`, 1500);
 
     // Launch the AutoIt Wrapper executable with the script's path
-    return procRunner(config.aiPath, [config.wrapperPath, '/Tidy', '/in', thisFile]);
+    return procRunner(config.tidyPath, [thisFile]);
+  });
+};
+
+const au3stripper = () => {
+  const thisDoc = window.activeTextEditor.document;
+  const thisFile = getActiveDocumentFileName();
+
+  // Save the file
+  thisDoc.save().then(() => {
+    if (thisDoc.isUntitled)
+      return window.showErrorMessage(`"${thisFile}" file must be saved first!`);
+
+    if (thisDoc.isDirty) return window.showErrorMessage(`File failed to save ("${thisFile}")`);
+
+    window.setStatusBarMessage(`Au3Stripper script...${thisFile}`, 1500);
+
+    // Launch the AutoIt Wrapper executable with the script's path
+    return procRunner(config.au3stripperPath, [thisFile]);
+  });
+};
+
+const addincludes = () => {
+  const thisDoc = window.activeTextEditor.document;
+  const thisFile = getActiveDocumentFileName();
+
+  // Save the file
+  thisDoc.save().then(() => {
+    if (thisDoc.isUntitled)
+      return window.showErrorMessage(`"${thisFile}" file must be saved first!`);
+
+    if (thisDoc.isDirty) return window.showErrorMessage(`File failed to save ("${thisFile}")`);
+
+    window.setStatusBarMessage(`Add missing standard includes tos script...${thisFile}`, 1500);
+
+    // Launch the AutoIt Wrapper executable with the script's path
+    return procRunner(config.aiPath, [config.wrapperPath, '/addincludes', '/prod', '/in', thisFile]);
   });
 };
 
@@ -952,7 +990,8 @@ const checkScript = () => {
     window.setStatusBarMessage(`Checking script...${thisFile}`, 1500);
 
     // Launch the AutoIt Wrapper executable with the script's path
-    return procRunner(config.aiPath, [config.wrapperPath, '/AU3check', '/prod', '/in', thisFile]);
+    //return procRunner(config.aiPath, [config.wrapperPath, '/AU3check', '/prod', '/in', thisFile]);
+    return procRunner(config.checkPath, [thisFile]);
   });
 };
 
@@ -1159,7 +1198,9 @@ export {
   launchInfo,
   launchKoda,
   runScript,
-  tidyScript as tidy,
+  tidy,
+  au3stripper,
+  addincludes,
   openInclude,
   insertHeader,
   restartScript,

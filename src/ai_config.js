@@ -68,6 +68,8 @@ const conf = {
     helpPath: { file: 'AutoIt3Help.exe' },
     infoPath: { file: 'Au3Info.exe' },
     kodaPath: { dir: 'SciTE\\Koda\\', file: 'FD.exe' },
+    tidyPath: { dir: 'SciTE\\Tidy\\', file: 'Tidy.exe' },
+    au3stripperPath: { dir: 'SciTE\\Au3Stripper\\', file: 'Au3Stripper.exe' },
     includePaths: [{ dir: '' }],
     smartHelp: { check: { dir: 'Advanced.Help\\HelpFiles\\', file: '' } },
   },

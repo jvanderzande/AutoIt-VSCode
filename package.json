@@ -3,7 +3,7 @@
   "displayName": "AutoIt",
   "description": "AutoIt language extension for Visual Studio Code",
   "icon": "img/ai_icon.png",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "publisher": "Damien",
   "galleryBanner": {
     "color": "#254768",
@@ -24,7 +24,8 @@
   ],
   "dependencies": {
     "iconv-lite": "^0.6.3",
-    "jsonc-parser": "^3.2.0"
+    "jsonc-parser": "^3.2.0",
+    "vsce": "^2.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -82,6 +83,14 @@
         },
         {
           "command": "extension.tidy",
+          "when": "editorLangId == autoit"
+        },
+        {
+          "command": "extension.au3stripper",
+          "when": "editorLangId == autoit"
+        },
+        {
+          "command": "extension.addincludes",
           "when": "editorLangId == autoit"
         },
         {
@@ -152,10 +161,6 @@
         "title": "AutoIt: Compile"
       },
       {
-        "command": "extension.tidy",
-        "title": "AutoIt: Tidy"
-      },
-      {
         "command": "extension.check",
         "title": "AutoIt: Check"
       },
@@ -178,6 +183,18 @@
       {
         "command": "extension.debugConsole",
         "title": "AutoIt: Debug to Console"
+      },
+      {
+        "command": "extension.tidy",
+        "title": "AutoIt: Tidy"
+      },
+      {
+        "command": "extension.au3stripper",
+        "title": "AutoIt: Au3Stripper"
+      },
+      {
+        "command": "extension.addincludes",
+        "title": "AutoIt: Au3Stripper"
       },
       {
         "command": "extension.launchKoda",
@@ -283,6 +300,21 @@
         "when": "editorTextFocus && editorLangId == autoit"
       },
       {
+        "command": "extension.tidy",
+        "key": "ctrl+t",
+        "when": "editorTextFocus && editorLangId == autoit"
+      },
+      {
+        "command": "extension.au3stripper",
+        "key": "ctrl+shift+x",
+        "when": "editorTextFocus && editorLangId == autoit"
+      },
+      {
+        "command": "extension.addincludes",
+        "key": "ctrl+shift+z",
+        "when": "editorTextFocus && editorLangId == autoit"
+      },
+      {
         "command": "extension.launchKoda",
         "key": "alt+m",
         "when": "editorTextFocus && editorLangId == autoit"
@@ -342,6 +374,18 @@
           "type": "string",
           "default": "",
           "markdownDescription": "Full or relative path to the AutoIt3Wrapper script, e.g. `C:\\Program Files (x86)\\AutoIt3\\SciTE\\AutoIt3Wrapper\\AutoIt3Wrapper.au3`\n\nLeave blank to use default, relative to `#autoit.aiPath#` path."
+        },
+        "autoit.tidyPath": {
+          "order": 1,
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the Tidy executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\SciTE\\Tidy\\Tidy.exe`"
+        },
+        "autoit.au3stripperPath": {
+          "order": 1,
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the Au3Stripper executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\SciTE\\Au3Stripper\\Au3Stripper.exe`"
         },
         "autoit.checkPath": {
           "order": 1,
@@ -730,6 +774,8 @@
   "scripts": {
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
-    "vscode:prepublish": "webpack --mode production"
+    "vscode:prepublish": "webpack --mode production",
+    "start": "node ./src/extension.js",
+    "package": "vsce package"
   }
 }

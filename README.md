@@ -29,6 +29,7 @@ By default, this extension is set up for the default installation of AutoIt and 
 | `autoit.aiPath`                     | Full path to the AutoIt executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\` or `C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe`                                                                        | "C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe" |
 | `autoit.wrapperPath`                | Full or relative path to the AutoIt3Wrapper script, e.g. `C:\\Program Files (x86)\\AutoIt3\\SciTE\\AutoIt3Wrapper\\AutoIt3Wrapper.au3`. Leave blank to use default, relative to `#autoit.aiPath#` path. | ""                                              |
 | `autoit.tidyPath`                   | Full or relative path to the AutoIt syntax Checker (Au3Check) executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\AU3Check.exe`. Leave blank to use default, relative to `#autoit.aiPath#` path.        | ""                                              |
+| `autoit.au3stripperPath`            | Full or relative path to the AutoIt Stripper (Au3Stripper) executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\SciTE\\Au3Stripper`. Leave blank to use default, relative to `#autoit.aiPath#` path.        | ""                                              |
 | `autoit.checkPath`                  | Full or relative path to the AutoIt syntax Checker (Au3Check) executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\AU3Check.exe`. Leave blank to use default, relative to `#autoit.aiPath#` path.        | ""                                              |
 | `autoit.helpPath`                   | Full or relative path to the AutoIt3Help executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\AutoIt3Help.exe`. Leave blank to use default, relative to `#autoit.aiPath#` path.                          | ""                                              |
 | `autoit.infoPath`                   | Full or relative path to the AutoIt Window Info executable, e.g. `C:\\Program Files (x86)\\AutoIt3\\Au3Info.exe`. Leave blank to use default, relative to `#autoit.aiPath#` path.                       | ""                                              |
@@ -68,6 +69,8 @@ By default, this extension is set up for the default installation of AutoIt and 
 - Build Script: `F7`
 - Run AutoIt Help: `Ctrl+F1`
 - Run Au3Info: `Ctrl+F6`
+- Run Tidy: `Alt+M`
+- Run Au3Stripper: `Ctrl+Shift+O`
 - Debug to MsgBox: `Ctrl+Shift+D`
 - Debug to Console: `Alt+D`
 - Run Koda: `Alt+M`
